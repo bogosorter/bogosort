@@ -188,3 +188,57 @@ X.insert(2);
 cout << *X.find_by_order(1) << "\n";
 cout << X.order_of_key(2) << "\n";
 ```
+
+**Subset generation**
+
+```cpp
+void search(int k) {
+    if (k == n) {
+        // process subset
+    } else {
+        search(k+1);
+        subset.push_back(k);
+        search(k+1);
+        subset.pop_back();
+    }
+}
+```
+
+**Generating permutations**
+
+```cpp
+vector<int> permutation;
+for (int i = 0; i < n; i++) {
+    permutation.push_back(i);
+}
+do {
+    // process permutation
+} while (next_permutation(permutation.begin(),permutation.end()));
+```
+
+**Prime Factors**
+
+```cpp
+vector<int> factors(int n) {
+    vector<int> f;
+    for (int x = 2; x*x <= n; x++) {
+        while (n%x == 0) {
+            f.push_back(x);
+            n /= x;
+        }
+    }
+    if (n > 1) f.push_back(n);
+    return f;
+}
+```
+
+**Sieve of Eratosthenes**
+
+```cpp
+for (int x = 2; x <= n; x++) {
+    if (sieve[x]) continue;
+    for (int u = 2*x; u <= n; u += x) {
+        sieve[u] = x;
+    }
+}
+```

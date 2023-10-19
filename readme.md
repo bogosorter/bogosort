@@ -2,9 +2,8 @@
 
 Scripts for competitive programming
 
-**Binary search**
-
 ```cpp
+// Binary search
 const int RESULT = 100;
 
 int bsearch() {
@@ -20,9 +19,8 @@ int bsearch() {
 }
 ```
 
-**BFS**
-
 ```cpp
+// BFS
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -49,38 +47,32 @@ int bfs(int start, int end) {
 }
 ```
 
-**DFS**
-
 ```cpp
+// DFS
+// Suited for trees. If you want to use this with general undirected graphs,
+// use a `visited` vector
+
 #include <bits/stdc++.h>
 using namespace std;
 
 vector<vector<int>> adjacent;
+vector<bool> visited;
 
-int bfs(int start, int end) {
-    vector<bool> visited(adjacent.size());
-    queue<pair<int, int>> q;
-    q.push({start, 0});
+bool dfs(int vertex, int parent, int goal) {
+    if (vertex == goal) return true;
 
-    while(!q.empty()) {
-        auto p = q.front();
-        q.pop();
-        int vertex = p.first;
-        int distance = p.second;
-
-        if (vertex == end) return distance;
-        if (visited[vertex]) continue;
-        visited[vertex] = true;
-        for (int v : adjacent[vertex]) {
-            q.push({v, distance + 1});
-        }
+    bool found = false;
+    for (auto v : adjacent[vertex]) {
+        if (v == parent) continue;
+        if (!dfs(v, vertex, goal)) continue;
+        found = true;
+        break;
     }
 }
 ```
 
-**Segment Tree**
-
 ```cpp
+// Segment tree
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -135,9 +127,8 @@ struct STree {
 };
 ```
 
-**UFDS**
-
 ```cpp
+// 
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -170,9 +161,8 @@ struct UFDS {
 };
 ```
 
-**PDBS**
-
 ```cpp
+// PBDS
 #include <ext/pb_ds/detail/standard_policies.hpp>
 // Or
 #include <ext/pb_ds/assoc_container.hpp>
@@ -189,9 +179,8 @@ cout << *X.find_by_order(1) << "\n";
 cout << X.order_of_key(2) << "\n";
 ```
 
-**Subset generation**
-
 ```cpp
+// Subset generation
 void search(int k) {
     if (k == n) {
         // process subset
@@ -204,9 +193,8 @@ void search(int k) {
 }
 ```
 
-**Generating permutations**
-
 ```cpp
+// Generating permutations
 vector<int> permutation;
 for (int i = 0; i < n; i++) {
     permutation.push_back(i);
@@ -216,9 +204,8 @@ do {
 } while (next_permutation(permutation.begin(),permutation.end()));
 ```
 
-**Prime Factors**
-
 ```cpp
+// Prime factors
 vector<int> factors(int n) {
     vector<int> f;
     for (int x = 2; x*x <= n; x++) {
@@ -232,9 +219,8 @@ vector<int> factors(int n) {
 }
 ```
 
-**Sieve of Eratosthenes**
-
 ```cpp
+// Sieve of Eratosthenes
 for (int x = 2; x <= n; x++) {
     if (sieve[x]) continue;
     for (int u = 2*x; u <= n; u += x) {
